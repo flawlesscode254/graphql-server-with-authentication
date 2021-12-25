@@ -13,6 +13,9 @@ module.exports = {
           email: user.email
         });
         const post = await newPost.save();
+        context.pubsub.publish("NEW_POST", {
+          newPost: post
+        })
         return post;
       }
     },
